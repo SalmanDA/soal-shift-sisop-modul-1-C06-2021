@@ -124,16 +124,120 @@ done >> user_statistic.csv
 ## Laporan Soal Nomor 2 :
 
 ### 2A
-Pada soal ini, diminta untuk menampilkan row ID terbesar dengan persentase profit terbesar. Pada pengerjaan soal ini kami menghitung besarnya persentase profit dari setiap row ID dan membandingkannya dengan row ID yang selanjutnya. Jika ditemukan row ID yang persentase profitnya lebih besar dari persentase profit row ID yang sebelumnya, maka nilai persentase profit dan row IDnya akan disimpan ke variabel max dan maxid yang akan menjadi output dari program ini.
+Pada soal ini, diminta untuk menampilkan row ID terbesar dengan persentase profit terbesar. Pada pengerjaan soal ini kami menghitung besarnya persentase profit dari setiap row ID dan membandingkannya dengan row ID yang selanjutnya. 
+
+```
+cost_price=($18-$21)
+profit_percentage=($21/cost_price)*100
+id=$1
+```
+
+Jika ditemukan row ID yang persentase profitnya lebih besar dari persentase profit row ID yang sebelumnya, maka nilai persentase profit dan row IDnya akan disimpan ke variabel max dan maxid yang akan menjadi output dari program ini.
+
+```
+if(profit_percentage>=max)
+	{
+		max=profit_percentage
+		maxid=id
+	}
+```
+
+Berikut perintah outputnya:
+
+```
+{printf "Transaksi terakhir dengan profit percentage terbesar yaitu %d dengan persentase %.2f%%.\n\n",maxid,max}' $data >> hasil.txt
+```
 
 ### 2B
-Supaya mendapatkan consumer yang melakukan transaksi pada tahun 2017, maka kami melakukan pengecekan pada kolom Order Date yang mengandung substring "17". Jika ditemukan consumer yang melakukan order pada tahun 2017, maka nama consumer tersebut akan disimpan sebagai indeks dari array yang memiliki nilai positif. Saat semua tanggal pemesanan selesai diperiksa, kami keluarkan nama-nama yang dijadikan indeks array tadi menggunakan for looping.
+Supaya mendapatkan consumer yang melakukan transaksi pada tahun 2017, maka kami melakukan pengecekan pada kolom Order Date yang mengandung substring "17" dan negara yang bernama "Albuquerque". Jika ditemukan consumer yang melakukan order pada tahun 2017, maka nama consumer tersebut akan disimpan sebagai indeks dari array yang memiliki nilai positif. 
+
+```
+if($10~"Albuquerque" && $3~"17")
+{
+	array[$7]++
+}
+```
+
+Saat semua tanggal pemesanan selesai diperiksa, kami keluarkan nama-nama yang dijadikan indeks array tadi menggunakan for looping.
+
+```
+{for(i in array) {print i} {printf "\n"}}' $data >> hasil.txt
+```
 
 ### 2C
 Kami menggunakan array untuk menyimpan banyaknya transaksi dari suatu segment consumer dengan nama segment sebagai indeksnya. Berikutnya kami mengecek setiap baris dan menambahkan nilai array dengan nama indeks dan nama segment yang sesuai. Contohnya setiap ditemukan transaksi di segment consumer, maka nilai array["Consumer"] akan bertambah. Setelah semua baris selesai diperiksa, dilakukan perbandingan antara segment Consumer, Home Office dan Corporate untuk mendapatkan segment mana yang melakukan transaksi paling kecil.
 
+```
+array[$8]++
+if(array["Consumer"]<array["Home Office"])
+{
+	min=array["Consumer"]
+	segment="Consumer"
+	if(min>array["Corporate"])
+	{
+		segment="Corporate"
+		min=array["Corporate"]
+	}
+}
+else
+{
+	min=array["Home Office"]
+	segment="Home Offfice"
+	if(min>array["Corporate"])
+	{
+		segment="Corporate"
+		min=array["Corporate"]
+	}
+}
+```
+
+Berikut perintah outputnya:
+
+```
+{print "Tipe segmen customer yang penjualannya paling sedikit adalah",segment,"dengan",min,"transaksi.\n"}' $data >> hasil.txt
+```
+
 ### 2D
-Pengerjaan soal ini hampir sama dengan pengerjaan soal 2C. Pertama megidetifikasi setiap baris apakah regionnya termasuk ke Central, South, East atau West lalu menambahkan profit dari  baris tersebut ke array dengan indeks berupa nama region. Pada akhir program, semua region dibandingkan jumlah profitnya dan yang memiliki jumlah profit paling kecil akan menjadi output.
+Pengerjaan soal ini hampir sama dengan pengerjaan soal 2C. Pertama megidetifikasi setiap baris apakah regionnya termasuk ke Central, South, East atau West lalu menambahkan profit dari  baris tersebut ke array dengan indeks berupa nama region. 
+
+```
+array[$13]=array[$13]+$21
+```
+
+Pada akhir program, semua region dibandingkan jumlah profitnya dan yang memiliki jumlah profit paling kecil akan menjadi output.
+
+```
+min1=0
+min2=0
+rmin1="east"
+rmin2="Central"
+if(array["East"]<array["West"])
+{
+	min1=array["East"]
+	rmin1="East"
+}
+else
+{
+	min1=array["West"]
+	rmin1="West"
+}
+if(array["South"]<array["Central"])
+{
+        min2=array["South"]
+	rmin2="South"
+}
+        else
+        {
+        min2=array["Central"]
+	rmin2="Central"
+}
+if(min2<min1)
+{
+        min1=min2
+	rmin1=rmin2
+	region=rmin1
+}
+```
 
 ### 2E
 Output dari semua soal nomor 2 diletakkan pada file hasil.txt.
