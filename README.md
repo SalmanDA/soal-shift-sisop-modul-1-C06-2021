@@ -137,3 +137,11 @@ Pengerjaan soal ini hampir sama dengan pengerjaan soal 2C. Pertama megidetifikas
 
 ### 2E
 Output dari semua soal nomor 2 diletakkan pada file hasil.txt.
+
+
+## Laporan Soal Nomor 3 :
+
+### 3A
+Didalam soal ini kita diminta untuk membuat script untuk mengunduh 23 gambar dari "https://loremflickr.com/320/240/kitten". Kita juga diminta untuk menyimpan log proses downlad file. Pengerjaan script menggunak looping while. Dikarenakan ada kemungkinan terdapat duplikat dalam proses mendownload file maka dibuatlah script tambahan untuk menghapus file duplikat. Untuk command mengunduh kita menggunakan wget. 
+
+```wget -o Foto.log -O /home/iamfadilahmad/uwu/Koleksi_$b 'http://loremflickr.com/320/240/kitten'```
