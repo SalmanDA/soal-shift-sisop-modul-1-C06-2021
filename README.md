@@ -168,4 +168,4 @@ let mod=$a%2
 Pada soal ini kita diminta untuk ZIP file sebelumnya yang sudah didownload, yang kemudian kita beri password sesuai dengan tanggal zip tersebut dibuat.
 
 ### 3E
-Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat
+Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat diikuti rm untuk menghapus folder zip yang sudah tidak digunakan.
