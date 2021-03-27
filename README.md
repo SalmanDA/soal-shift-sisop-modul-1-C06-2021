@@ -3,34 +3,123 @@
 ## Laporan Soal Nomor 1 :
 
 ### 1A
-Dalam soal kami diminta untuk mengumpulkan informasi yang ada di file syslog.log. Informasi yang diperlukan jenis log, pesan log, dan username pada setiap baris log. Untuk menyelesaikan soal ini kami memakai bantuan REGEX dan GREP.
+Dalam soal kami diminta untuk mengumpulkan informasi yang ada di file syslog.log. Informasi yang diperlukan jenis log, pesan log, dan username pada setiap baris log. Untuk menyelesaikan soal ini kami memakai bantuan GREP dan SED dengan menggunakan REGEX.
+
+- Gunakan grep kemudian pilih pattern yang mengandung INFO atau ERROR
+- gunakan sed dengan s command, hilangkan string sebelum dan ":"
+
+```grep "INFO\|ERROR" syslog.log | sed 's/.*: \(.*\).*/\1/g'```
 
 ### 1B
 Dalam soal 1b kami diminta menampilkan pesan error beserta jumlah kemunculannya. Dalam poin ini kami filtering menggunakan grep, kemudian gunakan fitur count untuk menghitung jumlah kemunculannya.
 
+```
+grep "ERROR" $location/syslog.log
+echo "Count Error: "; grep "ERROR" $location/syslog.log | grep -i -c "ERROR"
+```
+
 ### 1C
 Dalam soal 1c kami diminta untuk menampilkan jumlah kemunculan ERROR dan INFO untuk setiap usernya. Pada poin ini kami menggunakan bantuan filter grep untuk mencari string antara "ERROR\|INFO" kemudian di filter dengan sed untuk mengambil username, setelah itu pakai fitur sort and count.
+
+```#grep 'INFO\|ERROR' syslog.log | sed 's/.*(\(.*\)).*/\1/g' | sort | uniq -c```
 
 ### 1D
 Dalam soal 1d diminta apa yang didapatkan di poin b, dituliskan kedalam file error_message.csv dengan header Error,Count yang kemudian diikuti pesan error dan di urutkan berdasar jumlah kemunculan dari error yang terbanyak. Step yang kami jalankan :
 
 - Gunakan `echo` untuk print header kemudian masukan kedalam file error_message.csv
+
+```echo "Error,Count" >> error_message.csv```
+
 - Deklarasi sebuah variabel untuk menyimpan baris grep nanti
-- untuk filtering soal yang diminta kami menggunakan `grep` kemudian string `"ERROR"` terhadap file yang diinginkan (syslog.log) kemudian gunakan fitur sed dengan filter `'s/.*` untuk mengambil string, kemudian `ERROR` mengambil string mulai dari setelah ERROR untuk mengambil tipe error, filter `\(.*)` untuk mengambil string tanpa syarat, regex `(.*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk menutup filtering. kemudian gunakan fitur sort, uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping, diakhir ditambah sort -nr untuk menugrutkan mulai dari yang terbanyak.
+
+```i="0";```
+
+- untuk filtering soal yang diminta kami menggunakan `grep` kemudian string `"ERROR"` terhadap file yang diinginkan (syslog.log) kemudian gunakan fitur sed dengan filter `'s/.*` untuk replace string, kemudian `ERROR` mengambil string mulai dari setelah ERROR untuk mengambil tipe error, filter `\(.*)` untuk mengambil string tanpa syarat, regex `(.*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk replace dengan string kosong dan menutup filtering. kemudian gunakan fitur sort, uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping, diakhir ditambah sort -nr untuk menugrutkan mulai dari yang terbanyak.
+
+```for Line in `grep "ERROR" syslog.log | sed 's/.*ERROR \(.*\) (.*/\1,/g' | sort | uniq -c | sort -nr` ```
+
 - kami menggunakan for dengan variabel untuk looping hasil grep diatas line per line, kemudian pakai if else untuk kondisi, jika line tersebut angka maka simpan di variabel untuk hasil count tipe error tersebut, jika line itu mengandung "," maka kata tersebut termasuk akhir kalimat jadi di echo tipe error dan jumlahnya, jika line tersebut hanya mengandung huruf biasa echo kalimat tanpa new line.
 - jika semua semua di looping hasilnya diinput kedalam file error_message.csv
+
+```
+do
+        if [[ "$Line" =~ [0-9] ]];
+        then
+                i=$Line
+        elif [[ "$Line" == *","* ]];
+        then
+                echo "${Line}${i}"
+        else
+                echo -n "${Line} " 
+        fi
+done >> error_message.csv
+```
 
 ### 1E
 Dalam soal 1e diminta untuk menampilkan apa yang didapat di poin c, kemudian dituliskan ke file user_statistic.csv dengan header Username,INFO,ERROR berdasarkan username secara ascending.
 
 - pertama untuk memulai mengerjakan soal kami menggunakan array yang menggunakan key string (userError) untuk menyimpan error yang dibuat oleh user, kemudian array orders untuk menyimpan key secara urut agar bisa digunakan pada array userError
-- untuk filtering soal yang diminta kami menggunakan `grep` kemudian string `"ERROR"` terhadap file yang diinginkan (syslog.log) kemudian gunakan fitur sed dengan filter `'s/.*` untuk mengambil string, kemudian `(` mengambil string mulai dari setelah ( untuk username, filter `\(.*)` untuk mengambil string tanpa syarat, regex `).*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk menutup filtering. kemudian gunakan fitur sort dan uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping.
+
+```
+declare -A userError;
+declare -a orders;
+e="0";
+```
+
+- untuk filtering soal yang diminta kami menggunakan `grep` kemudian string `"ERROR"` terhadap file yang diinginkan (syslog.log) kemudian gunakan fitur sed dengan filter `'s/.*` untuk subtitusi string, kemudian `(` mengambil string mulai dari setelah ( untuk username, filter `\(.*)` untuk rentang tanpa syarat, regex `).*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk replace dengan string kosong dan menutup filtering. kemudian gunakan fitur sort dan uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping.
+
+``` for eLine in `grep "ERROR" syslog.log | sed 's/.*(\(.*\)).*/\1/g' | sort | uniq -c` ```
+
 - kami menggunakan for untuk looping hasil grep menyimpan di variable $eLine, kemudian looping dengan do & done, jika $eLine angka maka simpan di variabel $e sebagai jumlah error yang dihasilkan oleh user, kemudian jika huruf maka $eLine termasuk username dan simpan sebagai key array userError dengan value $e, tambahkan nilay array order untuk menyimpan username untuk nanti diurutkan.
 - setelah filtering untuk error, kami menyiapkan tahap kedua untuk penulisan yang diminta soal, dengan echo header "Username,INFO,ERROR" kedalam file user_statistic.csv
-- kemudian setelah memasukan header, untuk data yang dibutuhkan kami menggunakan filter `grep` kemudian gunakan fitur sed dengan filter `'s/.*` untuk mengambil string, kemudian `(` mengambil string mulai dari setelah ( untuk username, filter `\(.*)` untuk mengambil string tanpa syarat, regex `).*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk menutup filtering. kemudian gunakan fitur sort dan uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping.
+
+```
+do 
+        if [[ "$eLine" =~ [0-9] ]];
+       then
+               e=$eLine
+       else
+              userError[$eLine]=$e; orders+=($eLine)
+      fi
+
+done
+```
+
+- kemudian setelah memasukan header, untuk data yang dibutuhkan kami menggunakan filter `grep` kemudian gunakan fitur sed dengan filter `'s/.*` untuk subtitusi string, kemudian `(` mengambil string mulai dari setelah ( untuk username, filter `\(.*)` untuk mengambil string tanpa syarat, regex `).*` untuk batasan akhir pengambilan string, regex `/\1/g'` untuk replace dengan string kosong dan menutup filtering. kemudian gunakan fitur sort dan uniq -c untuk mengurutkan dan mengeluarkan nilai jumlah setelah string di groupping.
+
+```
+echo "Username,INFO,ERROR" >> user_statistic.csv
+x="0";
+for uLine in `grep 'INFO\|ERROR' syslog.log | sed 's/.*(\(.*\)).*/\1/g' | sort | uniq -c`
+```
+
 - kami menggunakan for untuk looping hasil grep, menyimpan dalam variabel $uLine, kemudian looping dengan do & done, jika $uLine hanya berisi angka maka simpan di variabel $x, jika bukan maka masuk else. Dalam else deklarasikan terlebih dahulu $errorCount=0 untuk menandakan bahwa apakah user membuat error apa tidak, kemudian looping dengan for untuk mengambil key dalam array orders, looping dengan do & done dan gunakan kondisi cek apakah $key sama dengan $uLine, jika sama berarti user tersebut pernah melakukan error kemudian echo username, jumlah info yang telah dikurangi error, jumlah error. Ubah errorCount menjadi 1 sebagai tanda, supaya lebih efisien di break agar tidak perlu looping ke yang lainnya. Jika errorCount sama dengan 0 maka user tersebut tidak pernah melakukan error sehingga echo username,$x,0 karena $x sudah pasti hanya mengandung info dan error berjumlah 0
 - setelah semua selesai di looping dan di echo masukan hasil kedalam file user_statistics.csv
 
+```
+do
+        if [[ "$uLine" =~ [0-9] ]];
+       then
+               x=$uLine
+       else
+                errorCount=0;
+                for key in ${orders[@]};
+                do
+                        if [[ "$key"  == "$uLine" ]];
+                        then
+                                echo "${uLine},$(( ${x}-${userError[${key}]} )),${userError[${key}]}"
+                                errorCount=1;
+                                break;
+                        fi
+                done
+
+                if [ $errorCount -eq 0 ]
+                then
+                        echo "${uLine},${x},0"
+                fi
+       fi
+done >> user_statistic.csv
+```
 
 ## Laporan Soal Nomor 2 :
 
