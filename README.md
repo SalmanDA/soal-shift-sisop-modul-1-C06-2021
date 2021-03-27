@@ -145,3 +145,27 @@ Output dari semua soal nomor 2 diletakkan pada file hasil.txt.
 Didalam soal ini kita diminta untuk membuat script untuk mengunduh 23 gambar dari "https://loremflickr.com/320/240/kitten". Kita juga diminta untuk menyimpan log proses downlad file. Pengerjaan script menggunak looping while. Dikarenakan ada kemungkinan terdapat duplikat dalam proses mendownload file maka dibuatlah script tambahan untuk menghapus file duplikat. Untuk command mengunduh kita menggunakan wget. 
 
 ```wget -o Foto.log -O /home/iamfadilahmad/uwu/Koleksi_$b 'http://loremflickr.com/320/240/kitten'```
+
+### 3B
+Pada soal ini kita diminta untuk membuat cron untuk proses download dan membuat script untuk memasukkan file yang sudah di download ke dalam directory berdasarkan tanggal downlad. Di soal ini kita menggunakan bantuan MKDIR untuk membuat directory baru dan comman MV untuk memindahkan file yang sudah di download.
+
+```
+$(mkdir $(date +"%d-%m-%Y"))
+
+$(mv Koleksi* /home/iamfadilahmad/uwu/$(date +"%d-%m-%Y"))
+$(mv Foto.log /home/iamfadilahmad/uwu/$(date +"%d-%m-%Y"))
+```
+
+### 3C
+Soal ini meminta kita untuk mendownload selain gambar dari soal 3A juga mendownload gambar kelinci dengan ketentuan selang-seling setiap harinya. Kita bisa menggunakan DATE untuk menentukan day of the year yang kemudian di modulo 2 untuk menentukan hari ganjil atau genap dalam tahun tersebut yang kemudian resultnya digunakan untuk menentukan gambar apa yang didownload di hari itu. Kemudian kita mengguanakan CASE untuk menentukan command mana yang digunakan di hari tersebut.
+
+```
+a=$(date "+%--j")
+
+let mod=$a%2
+```
+### 3D
+Pada soal ini kita diminta untuk ZIP file sebelumnya yang sudah didownload, yang kemudian kita beri password sesuai dengan tanggal zip tersebut dibuat.
+
+### 3E
+Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat
