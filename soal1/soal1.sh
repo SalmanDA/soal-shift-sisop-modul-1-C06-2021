@@ -7,20 +7,24 @@
 #Ishaq Adheltyo 167
 #########################
 
-#NOMOR 1A dan NOMOR 1B
+#NOMOR 1A
 
-#while read line
-#do
-#	echo $line;
-#	i=$((i + 1));
+#grep "INFO\|ERROR" syslog.log | sed 's/.*: \(.*\).*/\1/g'
 
-#done < $location/syslog.log
-#echo $i;
+#End of NOMOR 1A
+
+#NOMOR 1B
 
 #grep "ERROR" $location/syslog.log
 #echo "Count Error: "; grep "ERROR" $location/syslog.log | grep -i -c "ERROR"
 
-#End of NOMOR 1A and 1B
+#End of NOMOR 1B
+
+#NOMOR 1C
+
+#grep 'INFO\|ERROR' syslog.log | sed 's/.*(\(.*\)).*/\1/g' | sort | uniq -c
+
+#End of NOMOR 1C
 
 #NOMOR 1D
 
