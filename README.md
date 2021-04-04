@@ -55,6 +55,9 @@ do
 done >> error_message.csv
 ```
 
+### Output 1D
+![Output1D](/img/output-soal1d.png)
+
 ### 1E
 Dalam soal 1e diminta untuk menampilkan apa yang didapat di poin c, kemudian dituliskan ke file user_statistic.csv dengan header Username,INFO,ERROR berdasarkan username secara ascending.
 
@@ -120,6 +123,9 @@ do
        fi
 done >> user_statistic.csv
 ```
+
+### Output 1E
+![Output1E](/img/output-soal1e.png)
 
 ## Laporan Soal Nomor 2 :
 
