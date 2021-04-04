@@ -1,0 +1,19 @@
+--2021-04-03 11:52:22--  http://loremflickr.com/320/240/kitten
+Resolving loremflickr.com (loremflickr.com)... 104.21.47.37, 172.67.170.91
+Connecting to loremflickr.com (loremflickr.com)|104.21.47.37|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://loremflickr.com/320/240/kitten [following]
+--2021-04-03 11:52:22--  https://loremflickr.com/320/240/kitten
+Connecting to loremflickr.com (loremflickr.com)|104.21.47.37|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /cache/resized/65535_50600292938_2467af2241_320_240_nofilter.jpg [following]
+--2021-04-03 11:52:22--  https://loremflickr.com/cache/resized/65535_50600292938_2467af2241_320_240_nofilter.jpg
+Reusing existing connection to loremflickr.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 7104 (6,9K) [image/jpeg]
+Saving to: ‘/home/iamfadilahmad/uwu/Koleksi_2’
+
+     0K ......                                                100% 15,6M=0s
+
+2021-04-03 11:52:22 (15,6 MB/s) - ‘/home/iamfadilahmad/uwu/Koleksi_2’ saved [7104/7104]
+
