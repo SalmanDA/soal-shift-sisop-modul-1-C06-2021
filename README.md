@@ -316,6 +316,6 @@ rm -r Kucing_* Kelinci_*
 Setelah melakukan zip kita hapus file original agar tidak ada duplikat
 
 ### Output 3D
-![Output 3D](/main/img/hasil%203d%20sh.JPG)
+![Output 3D](/img/hasil%203d%20sh.JPG)
 ### 3E
 Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat diikuti rm untuk menghapus folder zip yang sudah tidak digunakan.
