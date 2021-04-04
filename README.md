@@ -277,7 +277,7 @@ Kemudian ada syarat agar tidak ada foto yang duplikat, oleh karena itu dalam set
 Dengan membandingkan hash value masing-masing file kita bisa mendeteksi file duplikat dan menghapusnya. 
 
 ### Output 3A
-![Output 3A](/img/hasil_3a_sh.jpg)
+![Output 3A](/img/hasil%203a%20sh.jpg)
 
 
 ### 3B
@@ -291,7 +291,7 @@ $(mv Foto.log /home/iamfadilahmad/uwu/$(date +"%d-%m-%Y"))
 
 ```
 ### Output 3B
-![Output 3B](/img/hasil_3b_sh.jpg)
+![Output 3B](/img/hasil%203b%20sh.jpg)
 
 ### 3C
 Soal ini meminta kita untuk mendownload selain gambar dari soal 3A juga mendownload gambar kelinci dengan ketentuan selang-seling setiap harinya. Kita bisa menggunakan DATE untuk menentukan day of the year yang kemudian di modulo 2 untuk menentukan hari ganjil atau genap dalam tahun tersebut yang kemudian resultnya digunakan untuk menentukan gambar apa yang didownload di hari itu. Kemudian kita mengguanakan CASE untuk menentukan command mana yang digunakan di hari tersebut.
@@ -303,7 +303,7 @@ let mod=$a%2
 ```
 
 ### Output 3C
-![Output 3C](/img/hasil_3c_sh.jpg)
+![Output 3C](/img/hasil%203c%20sh.jpg)
 
 ### 3D
 Pada soal ini kita diminta untuk ZIP file sebelumnya yang sudah didownload, yang kemudian kita beri password sesuai dengan tanggal zip tersebut dibuat.
@@ -316,7 +316,7 @@ rm -r Kucing_* Kelinci_*
 Setelah melakukan zip kita hapus file original agar tidak ada duplikat
 
 ### Output 3D
-![Output 3D](/img/hasil_3d_sh.jpg)
+![Output 3D](/img/hasil%203d%20sh.jpg)
 
 ### 3E
 Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat diikuti rm untuk menghapus folder zip yang sudah tidak digunakan.
