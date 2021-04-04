@@ -149,7 +149,7 @@ Berikut perintah outputnya:
 ```
 
 ### 2B
-Supaya mendapatkan consumer yang melakukan transaksi pada tahun 2017, maka kami melakukan pengecekan pada kolom Order Date yang mengandung substring "17" dan negara yang bernama "Albuquerque". Jika ditemukan consumer yang melakukan order pada tahun 2017, maka nama consumer tersebut akan disimpan sebagai indeks dari array yang memiliki nilai positif. 
+Soal ini meminta kita untuk menampillkan nama consumer yang melakukan transaksi pada tahun 2017 yang berasla dari Albuquerque. Supaya mendapatkan consumer yang melakukan transaksi pada tahun 2017, maka kami melakukan pengecekan pada kolom Order Date yang mengandung substring "17" dan negara yang bernama "Albuquerque". Jika ditemukan consumer yang melakukan order pada tahun 2017, maka nama consumer tersebut akan disimpan sebagai indeks dari array yang memiliki nilai positif. 
 
 ```
 if($10~"Albuquerque" && $3~"17")
@@ -165,7 +165,7 @@ Saat semua tanggal pemesanan selesai diperiksa, kami keluarkan nama-nama yang di
 ```
 
 ### 2C
-Kami menggunakan array untuk menyimpan banyaknya transaksi dari suatu segment consumer dengan nama segment sebagai indeksnya. Berikutnya kami mengecek setiap baris dan menambahkan nilai array dengan nama indeks dan nama segment yang sesuai. Contohnya setiap ditemukan transaksi di segment consumer, maka nilai array["Consumer"] akan bertambah. Setelah semua baris selesai diperiksa, dilakukan perbandingan antara segment Consumer, Home Office dan Corporate untuk mendapatkan segment mana yang melakukan transaksi paling kecil.
+Pada soal ini kita diminta untuk menampilkan segment customer mana yang melakukan transaksi paling sedikit. Kami menggunakan array untuk menyimpan banyaknya transaksi dari suatu segment consumer dengan nama segment sebagai indeksnya. Berikutnya kami mengecek setiap baris dan menambahkan nilai array dengan nama indeks dan nama segment yang sesuai. Contohnya setiap ditemukan transaksi di segment consumer, maka nilai array["Consumer"] akan bertambah. Setelah semua baris selesai diperiksa, dilakukan perbandingan antara segment Consumer, Home Office dan Corporate untuk mendapatkan segment mana yang melakukan transaksi paling kecil.
 
 ```
 array[$8]++
@@ -198,7 +198,7 @@ Berikut perintah outputnya:
 ```
 
 ### 2D
-Pengerjaan soal ini hampir sama dengan pengerjaan soal 2C. Pertama megidetifikasi setiap baris apakah regionnya termasuk ke Central, South, East atau West lalu menambahkan profit dari  baris tersebut ke array dengan indeks berupa nama region. 
+Pengerjaan soal ini hampir sama dengan pengerjaan soal 2C, pada soal ini kami diminta untuk menampilkan region mana yang menghasilkan keunutngan paling sedikit diantara ke empat region yang ada. Pertama megidetifikasi setiap baris apakah regionnya termasuk ke Central, South, East atau West lalu menambahkan profit dari  baris tersebut ke array dengan indeks berupa nama region. 
 
 ```
 array[$13]=array[$13]+$21
@@ -241,6 +241,8 @@ if(min2<min1)
 
 ### 2E
 Output dari semua soal nomor 2 diletakkan pada file hasil.txt.
+
+![Output2](/img/ouput%20soal2.png)
 
 
 ## Laporan Soal Nomor 3 :
