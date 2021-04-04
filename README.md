@@ -257,6 +257,28 @@ Output dari semua soal nomor 2 diletakkan pada file hasil.txt.
 Didalam soal ini kita diminta untuk membuat script untuk mengunduh 23 gambar dari "https://loremflickr.com/320/240/kitten". Kita juga diminta untuk menyimpan log proses downlad file. Pengerjaan script menggunak looping while. Dikarenakan ada kemungkinan terdapat duplikat dalam proses mendownload file maka dibuatlah script tambahan untuk menghapus file duplikat. Untuk command mengunduh kita menggunakan wget. 
 
 ```wget -o Foto.log -O /home/iamfadilahmad/uwu/Koleksi_$b 'http://loremflickr.com/320/240/kitten'```
+Kemudian ada syarat agar tidak ada foto yang duplikat, oleh karena itu dalam setiap pengulangan kita membandingkan file terbaru dengan semua file sebelumnya agar tidak terjadi duplikasi. 
+
+```
+##Collecting necessary hash value to compare
+	test[$a]="$(md5sum Koleksi_$b | awk '{print $1;}')"
+
+	##Comparing
+	for(( c=a-1; c>=0; c=c-1 ))
+	do
+		if [[ "${test[$a]}" == "${test[$c]}" ]];
+		then
+		rm Koleksi_$b
+		b=$((b-1))
+		fi
+	done
+```
+
+Dengan membandingkan hash value masing-masing file kita bisa mendeteksi file duplikat dan menghapusnya. 
+
+### Output 3A
+![Output 3A](/img/hasil_3a_sh.jpg)
+
 
 ### 3B
 Pada soal ini kita diminta untuk membuat cron untuk proses download dan membuat script untuk memasukkan file yang sudah di download ke dalam directory berdasarkan tanggal downlad. Di soal ini kita menggunakan bantuan MKDIR untuk membuat directory baru dan comman MV untuk memindahkan file yang sudah di download.
@@ -266,7 +288,10 @@ $(mkdir $(date +"%d-%m-%Y"))
 
 $(mv Koleksi* /home/iamfadilahmad/uwu/$(date +"%d-%m-%Y"))
 $(mv Foto.log /home/iamfadilahmad/uwu/$(date +"%d-%m-%Y"))
+
 ```
+### Output 3B
+![Output 3B](/img/hasil_3b_sh.jpg)
 
 ### 3C
 Soal ini meminta kita untuk mendownload selain gambar dari soal 3A juga mendownload gambar kelinci dengan ketentuan selang-seling setiap harinya. Kita bisa menggunakan DATE untuk menentukan day of the year yang kemudian di modulo 2 untuk menentukan hari ganjil atau genap dalam tahun tersebut yang kemudian resultnya digunakan untuk menentukan gambar apa yang didownload di hari itu. Kemudian kita mengguanakan CASE untuk menentukan command mana yang digunakan di hari tersebut.
@@ -276,8 +301,22 @@ a=$(date "+%--j")
 
 let mod=$a%2
 ```
+
+### Output 3C
+![Output 3C](/img/hasil_3c_sh.jpg)
+
 ### 3D
 Pada soal ini kita diminta untuk ZIP file sebelumnya yang sudah didownload, yang kemudian kita beri password sesuai dengan tanggal zip tersebut dibuat.
+
+```
+zip -r -P $a Koleksi.zip Kucing_* Kelinci_*
+rm -r Kucing_* Kelinci_*
+```
+
+Setelah melakukan zip kita hapus file original agar tidak ada duplikat
+
+### Output 3D
+![Output 3D](/img/hasil_3d_sh.jpg)
 
 ### 3E
 Soal ini meminta kita untuk membuat cron sesuai kriteria yang telah disebutkan, untuk proses zip kita bisa menggunakan script yang sudah ditulis di soal 3D dan unzipnya bisa kita tulis bersamaan dengan cron dengan menggunakan UNZIP diikuti pasword yang sudah dibuat diikuti rm untuk menghapus folder zip yang sudah tidak digunakan.
